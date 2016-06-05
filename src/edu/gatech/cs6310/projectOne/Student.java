@@ -4,48 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-
 public class Student extends ARMS  {
-	private ArrayList<UUID> ClassesEnrolled;
-	private short MaxClassesAvailable;
-	private short MaxSemestersAvailable;
-	private ArrayList<UUID> SemestersAvailable;
-	private ArrayList<UUID> SemestersEnrolled;
-	private ArrayList<UUID> PrereqClasses;
-	private UUID StudentId;
-	private String StudentName;
-	private short CheckMaxClasses(){
-		return 2;
-	}
-	private short CheckMaxSemesters(){
-		return 2;
-	}
-	private ArrayList<UUID> GetSemestersEnrolled()
+	public int StudentId;
+	public ArrayList<Integer> CourseIds = new ArrayList<Integer>();
+	public ArrayList<Integer> DesiredCourseIds = new ArrayList<Integer>();
+	public Student(int id)
 	{
-		ArrayList<UUID> ids = new ArrayList<UUID>();
-		ids.add(UUID.randomUUID());
-		return ids;
+		StudentId = id;
 	}
-	private ArrayList<UUID> GetClassesEnrolled()
+	public void AddCourse(int id)
 	{
-		ArrayList<UUID> ids = new ArrayList<UUID>();
-		ids.add(UUID.randomUUID());
-		return ids;
+		CourseIds.add(id);
 	}
-	private String GetStudentName()
+	public void AddDesiredCourse(int id)
 	{
-		return "vesh";
+		DesiredCourseIds.add(id);
 	}
-	private UUID GetStudentId()
+	public void ProcessSchedule(ArrayList<Course> courses)
 	{
-		return UUID.randomUUID();
-	}
-	private UUID CreateStudentId()
-	{
-		return UUID.randomUUID();
-	}
-	private Boolean EnrollClasses(ArrayList<UUID> classes)
-	{
-		return true;
+		for (Course course : courses) {
+			for (Course prereq : Course.Prereqs)
+			{
+				
+			}
+		}
 	}
 }

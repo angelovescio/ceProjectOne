@@ -14,6 +14,7 @@ public class CSVReader {
 	public static List<String[]> parseLine(BufferedReader r) throws Exception {
 		List<String[]> items = new ArrayList<String[]>();
 		String line = "";
+		String skip = r.readLine();
 		do{
 			ArrayList<Integer> commas = new ArrayList<Integer>();
 			ArrayList<Integer> quotes = new ArrayList<Integer>();
