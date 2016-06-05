@@ -6,11 +6,12 @@ import java.util.UUID;
 
 
 public class Student extends ARMS  {
-	private List<UUID> ClassesEnrolled;
+	private ArrayList<UUID> ClassesEnrolled;
 	private short MaxClassesAvailable;
 	private short MaxSemestersAvailable;
-	private List<UUID> SemestersAvailable;
-	private List<UUID> SemestersEnrolled;
+	private ArrayList<UUID> SemestersAvailable;
+	private ArrayList<UUID> SemestersEnrolled;
+	private ArrayList<UUID> PrereqClasses;
 	private UUID StudentId;
 	private String StudentName;
 	private short CheckMaxClasses(){
@@ -19,15 +20,15 @@ public class Student extends ARMS  {
 	private short CheckMaxSemesters(){
 		return 2;
 	}
-	private List<UUID> GetSemestersEnrolled()
+	private ArrayList<UUID> GetSemestersEnrolled()
 	{
-		List<UUID> ids = new ArrayList<UUID>();
+		ArrayList<UUID> ids = new ArrayList<UUID>();
 		ids.add(UUID.randomUUID());
 		return ids;
 	}
-	private List<UUID> GetClassesEnrolled()
+	private ArrayList<UUID> GetClassesEnrolled()
 	{
-		List<UUID> ids = new ArrayList<UUID>();
+		ArrayList<UUID> ids = new ArrayList<UUID>();
 		ids.add(UUID.randomUUID());
 		return ids;
 	}
@@ -43,7 +44,7 @@ public class Student extends ARMS  {
 	{
 		return UUID.randomUUID();
 	}
-	private Boolean EnrollClasses(List<UUID> classes)
+	private Boolean EnrollClasses(ArrayList<UUID> classes)
 	{
 		return true;
 	}

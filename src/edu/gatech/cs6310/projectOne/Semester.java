@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.UUID;
 
 public class Semester extends ARMS  {
-	private List<UUID> ClassesAvailable;
+	private ArrayList<UUID> ClassesAvailable;
 	private short MaxClassesAvailable;
 	private UUID SemesterId;
-	private Boolean AddClasses(List<UUID> classes)
+	private Boolean AddClasses(ArrayList<UUID> classes)
 	{
 		return true;
 	}
@@ -16,9 +16,9 @@ public class Semester extends ARMS  {
 	{
 		return true;
 	}
-	private List<UUID> GetSemesterIds()
+	private ArrayList<UUID> GetSemesterIds()
 	{
-		List<UUID> ids = new ArrayList<UUID>();
+		ArrayList<UUID> ids = new ArrayList<UUID>();
 		ids.add(UUID.randomUUID());
 		return ids;
 	}

@@ -13,19 +13,19 @@ public class School extends ARMS {
 	{
 		return true;
 	}
-	private Boolean CheckConflictingStudentID(List<Student> students)
+	private Boolean CheckConflictingStudentID(ArrayList<Student> students)
 	{
 		return true;
 	}
-	private List<Short> GetSemestersAvailable()
+	private ArrayList<Short> GetSemestersAvailable()
 	{
-		List<Short> semesters = new ArrayList<Short>();
+		ArrayList<Short> semesters = new ArrayList<Short>();
 		semesters.add((short) 0);
 		return semesters;
 	}
-	private List<UUID> GetStudentIds()
+	private ArrayList<UUID> GetStudentIds()
 	{
-		List<UUID> ids = new ArrayList<UUID>();
+		ArrayList<UUID> ids = new ArrayList<UUID>();
 		ids.add(UUID.randomUUID());
 		return ids;
 	}

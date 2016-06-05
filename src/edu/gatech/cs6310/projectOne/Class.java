@@ -1,20 +1,22 @@
 package edu.gatech.cs6310.projectOne;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class Class extends ARMS  {
 	private UUID ClassId;
 	private String ClassName;
-	private List<UUID> CurrentStudents;
+	private ArrayList<UUID> CurrentStudents;
+	private ArrayList<UUID> PrereqClasses;
 	private short MaximumStudents;
-	private List<Short> SemestersOffered;
+	private ArrayList<Short> SemestersOffered;
 	
-	private Boolean AddStudents(List<Student> students)
+	private Boolean AddStudents(ArrayList<Student> students)
 	{
 		return true;
 	}
-	private Boolean RemoveStudents(List<Student> students)
+	private Boolean RemoveStudents(ArrayList<Student> students)
 	{
 		return true;
 	}

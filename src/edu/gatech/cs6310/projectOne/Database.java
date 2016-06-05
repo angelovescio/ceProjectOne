@@ -1,6 +1,7 @@
 package edu.gatech.cs6310.projectOne;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +19,8 @@ public class Database {
 		}
 		try {
 			con = DriverManager.getConnection("jdbc:h2:"+dbName, "ARMS", "" );
-			ResultSet rset = con.getMetaData().getTables(null, null, "school", null);
+			DatabaseMetaData dbm = con.getMetaData();
+			ResultSet rset = dbm.getTables(null, null, "SCHOOL", null);
 			if (rset.next())
 			{
 			  tableExists = true;
@@ -33,6 +35,7 @@ public class Database {
 			isDbReady = false; 
 			if(con != null)
 			{
+				DatabaseName = dbName;
 				SetupDatabase();
 			}
 		}
@@ -76,19 +79,19 @@ public class Database {
 	{
 		try
 		{
-			con = DriverManager.getConnection("jdbc:h2:"+DatabaseName, "ARMS", "" );
 	        Statement stmt = con.createStatement();
 	        //stmt.executeUpdate( "DROP TABLE table1" );
-	        stmt.executeUpdate( "CREATE TABLE school (UNIQUE KEY schoolid varchar(50), students integer, maxstudents integer, semesters varchar(50), maxsemesters integer )" );
-	        stmt.executeUpdate( "CREATE TABLE semester (UNIQUE KEY semesterid varchar(50), semestername varchar(50), classes varchar(50), maxclasses integer)" );
-	        stmt.executeUpdate( "CREATE TABLE class (UNIQUE KEY classid varchar(50), classname varchar(50), students varchar(50), maxstudents integer, semesters varchar(50), maxsemesters integer )" );
-	        stmt.executeUpdate( "CREATE TABLE student (UNIQUE KEY studentid varchar(50), studentname varchar(50), classesenrolled varchar(50), maxclasses integer, semesters varchar(50), maxsemesters integer )" );
+	        stmt.executeUpdate( "CREATE TABLE school (id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, schoolid varchar(50), students integer, maxstudents integer, semesters array, maxsemesters integer )" );
+	        stmt.executeUpdate( "CREATE TABLE semester (id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, semesterid varchar(50), semestername varchar(50), classes array, maxclasses integer)" );
+	        stmt.executeUpdate( "CREATE TABLE class (id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, classid varchar(50), classname varchar(50), students array, maxstudents integer, semesters array, maxsemesters integer )" );
+	        stmt.executeUpdate( "CREATE TABLE student (id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, studentid varchar(50), studentname varchar(50),classescomplete array, classesenrolled array, maxclasses integer, semesters array, maxsemesters integer )" );
 			stmt.close();
 			con.close();
 		}
 		catch( Exception e )
 		{
 			System.out.println( e.getMessage() );
+			return false;
 		}
 		return true;
 	}
