@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Vector;
 
-
 public class ProjectOne {
-
+	public static ArrayList<Course> Courses = new ArrayList<Course>();
 	/**
 	 * @param args
 	 */
@@ -26,9 +26,8 @@ public class ProjectOne {
 		CharSequence cs4 = "Demand";
 		File folder = new File("/home/ubuntu");
 		File[] listOfFiles = folder.listFiles();
-		ArrayList<Map<Integer,String>> titles = new ArrayList<Map<Integer,String>>();
-		ArrayList<Map<Integer,Integer>> avails = new ArrayList<Map<Integer,Integer>>();
-		ArrayList<Map<Integer,Integer>> prereqs = new ArrayList<Map<Integer,Integer>>();
+		ArrayList<Avails> avails = new ArrayList<Avails>();
+		HashMap<Integer,Integer> prereqs = new HashMap<Integer,Integer>();
 		ArrayList<Student> students = new ArrayList<Student>();
  		for (int i = 0; i < listOfFiles.length; i++) 
  		{
@@ -45,9 +44,7 @@ public class ProjectOne {
 						{
 							if(string.length ==2)
 							{
-								Map<Integer,Integer> m = new HashMap<Integer,Integer>();
-								m.put(Integer.parseInt(string[0]), Integer.parseInt(string[1]));
-								avails.add(m);
+								avails.add(new Avails(Integer.parseInt(string[0]), Integer.parseInt(string[1])));
 							}
 						}
 					}
@@ -59,7 +56,7 @@ public class ProjectOne {
 						{
 							if(string.length ==2)
 							{
-								prereqs.add(new HashMap<Integer,Integer>(Integer.parseInt(string[0]),Integer.parseInt(string[1])));
+								prereqs.put(Integer.parseInt(string[0]),Integer.parseInt(string[1]));
 							}
 						}
 					}
@@ -71,9 +68,8 @@ public class ProjectOne {
 						{
 							if(string.length ==2)
 							{
-								Map<Integer,String> m = new HashMap<Integer,String>();
-								m.put(Integer.parseInt(string[0]), string[1]);
-								titles.add(m);
+								Course course = new Course(string[1], Integer.parseInt(string[0]));
+								Courses.add(course);
 							}
 						}
 					}
@@ -124,17 +120,46 @@ public class ProjectOne {
 				}
 			}
 		}
+ 		for (Entry m : prereqs.entrySet()) {
+ 			for (int i=0;i<Courses.size();i++) {
+ 				Course c = Courses.get(i);
+ 				Integer p = (Integer)m.getKey();
+ 				if((Integer)m.getValue()==c.CourseId)
+ 				{
+ 					c.AddPrereq(p);
+ 					Courses.set(i, c);
+ 					//course.AddPrereq(p);
+ 				}
+			}
+		}
+ 		for (Avails m : avails) {
+ 			for (int i=0;i<Courses.size();i++) {
+ 				Course c = Courses.get(i);
+ 				
+ 				Integer k = m.courseId;
+ 				Integer p = m.semesterCode;
+ 				if(k==c.CourseId)
+ 				{
+ 					if(c.SemesterCode.size()>0)
+ 	 				{
+ 	 					String otro = "";
+ 	 				}
+ 					c.AddSemester(p);
+ 					Courses.set(i, c);
+ 				}
+			}
+		}
  		String test = "";
 	}
-	private ArrayList<Student> ProcessStudents(ArrayList<Student> students)
-	{
-		ArrayList<Student> retval = new ArrayList<Student>();
-		for (Student student : students) 
-		{
-			
-		}
-		return retval;
-	}
+//	private ArrayList<Course> ProcessCourses(ArrayList<List> course)
+//	{
+//		ArrayList<Course> retval = new ArrayList<Course>();
+//		for (Course c : course) 
+//		{
+//			
+//		}
+//		return retval;
+//	}
 	private static List<String[]> GetItemsFromCsv(File f)
 	{
 		List<String[]> list = new ArrayList<String[]>();

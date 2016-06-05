@@ -6,19 +6,19 @@ import java.util.UUID;
 
 public class Course extends ARMS  {
 	public int CourseId;
-	public static ArrayList<Integer> SemesterCode = new ArrayList<Integer>();
+	public ArrayList<Integer> SemesterCode = new ArrayList<Integer>();
 	public String CourseName;
-	public static ArrayList<Course> Prereqs = new ArrayList<Course>();
+	public ArrayList<Integer> Prereqs = new ArrayList<Integer>();
 	public Course(String name, int id)
 	{
 		CourseId = id;
 		CourseName = name;
 	}
-	public void AddPrereq(Course prereq)
+	public void AddPrereq(Integer prereq)
 	{
-		for (Course course : Prereqs) 
+		for (Integer course : Prereqs) 
 		{
-			if(course.CourseId == prereq.CourseId)
+			if(course == prereq)
 			{
 				return;
 			}

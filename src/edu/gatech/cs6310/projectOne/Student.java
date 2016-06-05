@@ -23,10 +23,10 @@ public class Student extends ARMS  {
 	public void ProcessSchedule(ArrayList<Course> courses)
 	{
 		for (Course course : courses) {
-			for (Course prereq : Course.Prereqs)
-			{
-				
-			}
+//			for (Course prereq : Course.Prereqs)
+//			{
+//				
+//			}
 		}
 	}
 }
