@@ -1,32 +1,42 @@
 package edu.gatech.cs6310.projectOne;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-public class Student extends ARMS  {
+public class Student
+{
 	public int StudentId;
-	public ArrayList<Integer> CourseIds = new ArrayList<Integer>();
+	public HashMap<Integer,Course> CourseIds = new HashMap<Integer,Course>();
 	public ArrayList<Integer> DesiredCourseIds = new ArrayList<Integer>();
 	public Student(int id)
 	{
 		StudentId = id;
 	}
-	public void AddCourse(int id)
+	public void AddCourse(Course c)
 	{
-		CourseIds.add(id);
+		CourseIds.put(c.CourseId,c);
 	}
 	public void AddDesiredCourse(int id)
 	{
+		for (Integer course : DesiredCourseIds) 
+		{
+			if(course == id)
+			{
+				return;
+			}
+		}
 		DesiredCourseIds.add(id);
 	}
-	public void ProcessSchedule(ArrayList<Course> courses)
+	public Boolean checkCourse(Integer course)
 	{
-		for (Course course : courses) {
-//			for (Course prereq : Course.Prereqs)
-//			{
-//				
-//			}
+		for (Integer c : CourseIds.keySet()) {
+			if(c == course)
+			{
+				return true;
+			}
 		}
+		return false;
 	}
 }

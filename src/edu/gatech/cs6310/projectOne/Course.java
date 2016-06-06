@@ -1,24 +1,26 @@
 package edu.gatech.cs6310.projectOne;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.UUID;
 
-public class Course extends ARMS  {
+public class Course{
 	public int CourseId;
 	public ArrayList<Integer> SemesterCode = new ArrayList<Integer>();
 	public String CourseName;
-	public ArrayList<Integer> Prereqs = new ArrayList<Integer>();
+	public ArrayList<Course> Prereqs = new ArrayList<Course>();
 	public Course(String name, int id)
 	{
 		CourseId = id;
 		CourseName = name;
 	}
-	public void AddPrereq(Integer prereq)
+	public void AddPrereq(Course prereq)
 	{
-		for (Integer course : Prereqs) 
+		for(Course c : Prereqs)
 		{
-			if(course == prereq)
+			if(c.CourseId == prereq.CourseId)
 			{
 				return;
 			}
@@ -35,5 +37,19 @@ public class Course extends ARMS  {
 			}
 		}
 		SemesterCode.add(semester);
+	}
+	public Boolean hasSemester(Integer id)
+	{
+		for (int s : SemesterCode) 
+		{
+			if(id == s)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	public String getClassTitle(){
+		return CourseName;
 	}
 }
