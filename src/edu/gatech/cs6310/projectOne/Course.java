@@ -1,10 +1,6 @@
 package edu.gatech.cs6310.projectOne;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.UUID;
 
 public class Course{
 	public int CourseId;

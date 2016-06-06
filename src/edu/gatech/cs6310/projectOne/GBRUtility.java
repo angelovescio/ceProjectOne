@@ -195,7 +195,6 @@ public class GBRUtility
 		Boolean retval = false;
 		for(int s=0;s<sSize;s++)
 		{
-			Student st = Students.get(s);
 			for(Entry<Integer,String> semester : Sem.semesters.entrySet())
 			{
 				int m = semester.getKey();
@@ -271,11 +270,11 @@ public class GBRUtility
 	{
 		Boolean retval = false;
 		int s=0,c=0,c2=0;
-		for(Student st : Students)
+		for(@SuppressWarnings("unused") Student st : Students)
 		{
 			for(Course co : Courses)
 			{
-				if(co.Prereqs != null || !co.Prereqs.isEmpty())
+				if(co.Prereqs.size()>0)
 				{
 					GRBLinExpr prereq1 = new GRBLinExpr();
 					GRBLinExpr prereq2 = new GRBLinExpr();
@@ -284,7 +283,7 @@ public class GBRUtility
 						int m = semester.getKey();
 						prereq1.addTerm(m+1, GConstSet[s][c][m]);
 					}
-					for(Course cp : co.Prereqs)
+					for(@SuppressWarnings("unused") Course cp : co.Prereqs)
 					{
 						for(Entry<Integer,String> semester : Sem.semesters.entrySet())
 						{
@@ -320,10 +319,8 @@ public class GBRUtility
 		GConstSet = new GRBVar[sSize][cSize][mSize];
 		for(int s=0;s<sSize;s++)
 		{
-			Student st = Students.get(s);
 			for(int c=0;c<cSize;c++)
 			{
-				Course co = Courses.get(c);
 				for(Entry<Integer,String> semester : Sem.semesters.entrySet())
 				{
 					int m = semester.getKey();

@@ -1,10 +1,8 @@
 package edu.gatech.cs6310.projectOne;
 
 import java.io.BufferedReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class CSVReader {
 	/**
@@ -14,6 +12,7 @@ public class CSVReader {
 	public static List<String[]> parseLine(BufferedReader r) throws Exception {
 		List<String[]> items = new ArrayList<String[]>();
 		String line = "";
+		@SuppressWarnings("unused")
 		String skip = r.readLine();
 		do{
 			ArrayList<Integer> commas = new ArrayList<Integer>();
@@ -34,11 +33,6 @@ public class CSVReader {
 	    		{
 	    			commas.add(i);
 	    		}
-	    	}
-	    	CharSequence chs = "CS 6505 Computability";
-	    	if(line.contains(chs))
-	    	{
-	    		String test = "";
 	    	}
 	    	if(quotes.size()%2==0)
 	    	{
