@@ -1,12 +1,8 @@
 package edu.gatech.cs6310.projectOne;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map.Entry;
 
 public class ProjectOne {
@@ -19,7 +15,16 @@ public class ProjectOne {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		File folder = new File("/home/ubuntu");
+		String firstArg = "";
+		if (args.length > 1) {
+		    try {
+		        firstArg = new String(args[1]);
+		    } catch (NumberFormatException e) {
+		        System.err.println("Argument" + args[1] + " must be an file path.");
+		        System.exit(1);
+		    }
+		}
+		File folder = new File(firstArg.replaceFirst("^~",System.getProperty("user.home")));
 		SchedulePrep prep = new SchedulePrep(folder);
 		HashMap<Integer,Float> errAndResult = prep.RunPrep();
 		for(Entry<Integer,Float> ret : errAndResult.entrySet())

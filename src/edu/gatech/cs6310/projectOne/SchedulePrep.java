@@ -20,20 +20,37 @@ public class SchedulePrep {
 	}
 	public HashMap<Integer,Float> RunPrep()
 	{
-		ParseInputFiles(Folder);
- 		OrganizeSchedule();
-		Semester sem = new Semester();
-		GBRUtility gs = new GBRUtility(Courses,students, sem);
-		HashMap<Integer,Float> errAndResult = gs.runGBR();
+		HashMap<Integer,Float> errAndResult = new HashMap<Integer, Float>();
+		Boolean hasFiles = ParseInputFiles(Folder);
+		if(hasFiles)
+		{
+			OrganizeSchedule();
+			Semester sem = new Semester();
+			GBRUtility gs = new GBRUtility(Courses,students, sem);
+			errAndResult = gs.runGBR();
+		}
+		else
+		{
+			errAndResult.put(30, (float) 0);
+		}
 		return errAndResult;
 	}
-	void ParseInputFiles(File folder)
+	Boolean ParseInputFiles(File folder)
 	{
+		Boolean retval = false;
 		File[] listOfFiles = folder.listFiles();
+		if(listOfFiles == null)
+		{
+			return false;
+		}
 		CharSequence cs1 = "Availability";
 		CharSequence cs2 = "Prerequisites";
 		CharSequence cs3 = "Titles";
 		CharSequence cs4 = "Demand";
+		CharSequence cs11 = "Availability";
+		CharSequence cs22 = "Before";
+		CharSequence cs33 = "Titles";
+		CharSequence cs44 = "Demand";
 		List<String[]> prereqContent = new ArrayList<String[]>();
 		List<String[]> courseContent = new ArrayList<String[]>();
 		List<String[]> studentContent = new ArrayList<String[]>();
@@ -43,7 +60,7 @@ public class SchedulePrep {
 			if (listOfFiles[i].isFile()) 
 			{
 				String name = listOfFiles[i].getName();
-				if (name.endsWith("csv"))
+				if (name.endsWith("csv")||name.endsWith("txt"))
 				{
 					if(name.contains(cs1))
 					{
@@ -66,10 +83,45 @@ public class SchedulePrep {
 				}
 			}
 		}
- 		OrganizeAvails(availsContent);
- 		OrganizeCourses(courseContent);
- 		OrganizePrereqs(prereqContent);
- 		OrganizeStudents(studentContent);
+ 		if(!availsContent.isEmpty())
+ 		{
+ 			OrganizeAvails(availsContent);
+ 			retval = true;
+ 		}
+ 		else
+ 		{
+ 			retval = false;
+ 		}
+ 		if(!courseContent.isEmpty())
+ 		{
+ 			OrganizeCourses(courseContent);
+ 			retval = true;
+ 		}
+ 		else
+ 		{
+ 			retval = false;
+ 		}
+ 		
+ 		if(!prereqContent.isEmpty())
+ 		{
+ 			OrganizePrereqs(prereqContent);
+ 			retval = true;
+ 		}
+ 		else
+ 		{
+ 			retval = false;
+ 		}
+ 		
+ 		if(!studentContent.isEmpty())
+ 		{
+ 			OrganizeStudents(studentContent);
+ 			retval = true;
+ 		}
+ 		else
+ 		{
+ 			retval = false;
+ 		}
+ 		return retval;
 	}
 	void OrganizeAvails(List<String[]> content)
 	{
